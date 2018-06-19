@@ -53,13 +53,13 @@ var liri = function ()
             {
                 param = "The Sign"// THe Sign by Ace of Base
             }
-            spotify.search({ type: 'track', query: 'The Sign' })
+            spotify.search({ type: 'track', query: param, limit: '1' })
                 .then(function (response)
                 {
-                    var songName = "";
-                    var artist = "";
-                    var link;
-                    var album;
+                    var songName =  JSON.stringify(response.tracks.items[0].name, null, 2);
+                    var artist = JSON.stringify(response.tracks.items[0].album.artists[0].name, null, 2);
+                    var link =  JSON.stringify(response.tracks.items[0].external_urls.spotify, null, 2);
+                    var album = JSON.stringify(response.tracks.items[0].album.name, null, 2);;
 
                     console.log(response.tracks.items);
 
@@ -69,7 +69,6 @@ var liri = function ()
                     console.log("Preview: " + link);
                     console.log("Album: " + album);
                     console.log("------------------------------------------------");
-
                 })
                 .catch(function (err)
                 {
@@ -77,7 +76,7 @@ var liri = function ()
                 });
             break;
 
-        case 'movie-this'://Song name id process.argv 3to infinit string 
+        case 'movie-this':
 
             if (param == "")
             {
